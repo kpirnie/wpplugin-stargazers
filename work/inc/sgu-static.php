@@ -1305,7 +1305,7 @@ if( ! class_exists( 'SGU_Static' ) ) {
 
             // Shadow overlay based on phase
             $shadow_path = match ($phase) {
-                'new' => "<circle cx=\"{$cx}\" cy=\"{$cy}\" r=\"" . ($r - 1) . "\" fill=\"{$shadow}\"/>",
+                'new', 'new_moon' => "<circle cx=\"{$cx}\" cy=\"{$cy}\" r=\"" . ($r - 1) . "\" fill=\"{$shadow}\"/>",
                 'waxing_crescent' => "<path d=\"M {$cx} 1 A " . ($r - 1) . " " . ($r - 1) . " 0 1 0 {$cx} " . ($size - 1) . " A " . ($r * 0.6) . " " . ($r - 1) . " 0 1 1 {$cx} 1\" fill=\"{$shadow}\"/>",
                 'first_quarter' => "<path d=\"M {$cx} 1 A " . ($r - 1) . " " . ($r - 1) . " 0 1 0 {$cx} " . ($size - 1) . " L {$cx} 1\" fill=\"{$shadow}\"/>",
                 'waxing_gibbous' => "<path d=\"M {$cx} 1 A " . ($r - 1) . " " . ($r - 1) . " 0 1 0 {$cx} " . ($size - 1) . " A " . ($r * 0.6) . " " . ($r - 1) . " 0 1 0 {$cx} 1\" fill=\"{$shadow}\"/>",

@@ -11,14 +11,14 @@ class ComposerStaticInitc96e14f509864e4bb11faa9df0e3bcde
     );
 
     public static $prefixLengthsPsr4 = array (
-        'K' => 
+        'K' =>
         array (
             'KP\\WPFieldFramework\\' => 20,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'KP\\WPFieldFramework\\' => 
+        'KP\\WPFieldFramework\\' =>
         array (
             0 => __DIR__ . '/..' . '/kevinpirnie/kpt-wpfieldframework/src',
         ),

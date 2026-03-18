@@ -85,6 +85,7 @@ if (! class_exists('\KP\WPFieldFramework\OptionsPage')) {
             'option_name'           => '',
             'option_key'            => '',
             'show_export_import'    => false,
+            'tab_layout'            => 'horizontal',
             'autoload'              => null,
             'tabs'                  => array(),
             'sections'              => array(),
@@ -130,8 +131,8 @@ if (! class_exists('\KP\WPFieldFramework\OptionsPage')) {
                 foreach ($this->config['tabs'] as $tab_id => $tab) {
                     if (! empty($tab['sections'])) {
                         foreach ($tab['sections'] as $section_id => $section) {
-                                $section['tab'] = $tab_id;
-                                $this->addSection($section_id, $section);
+                            $section['tab'] = $tab_id;
+                            $this->addSection($section_id, $section);
                         }
                     }
                 }
@@ -155,7 +156,7 @@ if (! class_exists('\KP\WPFieldFramework\OptionsPage')) {
          */
         public function addSection(string $section_id, array $section): self
         {
-            $this->sections[ $section_id ] = wp_parse_args(
+            $this->sections[$section_id] = wp_parse_args(
                 $section,
                 array(
                     'title'       => '',
@@ -185,11 +186,11 @@ if (! class_exists('\KP\WPFieldFramework\OptionsPage')) {
          */
         public function addField(string $section_id, array $field): self
         {
-            if (! isset($this->fields[ $section_id ])) {
-                $this->fields[ $section_id ] = array();
+            if (! isset($this->fields[$section_id])) {
+                $this->fields[$section_id] = array();
             }
 
-            $this->fields[ $section_id ][] = $field;
+            $this->fields[$section_id][] = $field;
             return $this;
         }
 
@@ -227,6 +228,17 @@ if (! class_exists('\KP\WPFieldFramework\OptionsPage')) {
         }
 
         /**
+         * Get the required capability for this options page.
+         *
+         * @since  1.0.0
+         * @return string WordPress capability.
+         */
+        public function getCapability(): string
+        {
+            return (string) $this->config['capability'];
+        }
+
+        /**
          * Register the options page with WordPress.
          *
          * @since  1.0.0
@@ -236,10 +248,10 @@ if (! class_exists('\KP\WPFieldFramework\OptionsPage')) {
         {
             if (! empty($this->config['parent_slug'])) {
                 // Add as submenu page.
-                add_submenu_page($this->config['parent_slug'], $this->config['page_title'], $this->config['menu_title'], $this->config['capability'], $this->config['menu_slug'], array( $this, 'renderPage' ));
+                add_submenu_page($this->config['parent_slug'], $this->config['page_title'], $this->config['menu_title'], $this->config['capability'], $this->config['menu_slug'], array($this, 'renderPage'));
             } else {
                 // Add as top-level menu page.
-                add_menu_page($this->config['page_title'], $this->config['menu_title'], $this->config['capability'], $this->config['menu_slug'], array( $this, 'renderPage' ), $this->config['icon_url'], $this->config['position']);
+                add_menu_page($this->config['page_title'], $this->config['menu_title'], $this->config['capability'], $this->config['menu_slug'], array($this, 'renderPage'), $this->config['icon_url'], $this->config['position']);
             }
         }
 
@@ -259,7 +271,7 @@ if (! class_exists('\KP\WPFieldFramework\OptionsPage')) {
                 $this->config['option_key'],
                 array(
                     'type'              => 'array',
-                    'sanitize_callback' => array( $this, 'sanitizeOptions' ),
+                    'sanitize_callback' => array($this, 'sanitizeOptions'),
                     'default'           => array(),
                     'show_in_rest'      => false,
                 )
@@ -296,8 +308,8 @@ if (! class_exists('\KP\WPFieldFramework\OptionsPage')) {
                 );
 
                 // Register fields for this section.
-                if (! empty($this->fields[ $section_id ])) {
-                    foreach ($this->fields[ $section_id ] as $field) {
+                if (! empty($this->fields[$section_id])) {
+                    foreach ($this->fields[$section_id] as $field) {
                         $this->registerField($section_id, $field);
                     }
                 }
@@ -320,7 +332,7 @@ if (! class_exists('\KP\WPFieldFramework\OptionsPage')) {
                 $label .= sprintf('<br /><span class="kp-wsf-sublabel">%s</span>', wp_kses_post($field['sublabel']));
             }
 
-            $row_class = 'kp-wsf-field-row kp-wsf-field-row--' . ( $field['type'] ?? 'text' );
+            $row_class = 'kp-wsf-field-row kp-wsf-field-row--' . ($field['type'] ?? 'text');
             if (! empty($field['conditional'])) {
                 $row_class .= ' kp-wsf-conditional-field';
             }
@@ -391,16 +403,26 @@ if (! class_exists('\KP\WPFieldFramework\OptionsPage')) {
         {
             $tabs = $this->config['tabs'];
             $current_tab = isset($_GET['tab']) ? sanitize_key($_GET['tab']) : array_key_first($tabs);
+            $layout_class = $this->config['tab_layout'] === 'vertical' ? 'kp-wsf-tabs-vertical' : 'kp-wsf-tabs-horizontal';
 
-            // Render tab navigation.
-            echo '<nav class="nav-tab-wrapper wp-clearfix">';
+            echo '<div class="kp-wsf-tabs-wrapper ' . esc_attr($layout_class) . '">';
+
+            // Render tab navigation
+            echo '<nav class="kp-wsf-tab-nav">';
             foreach ($tabs as $tab_id => $tab) {
-                $active = ( $current_tab === $tab_id ) ? ' nav-tab-active' : '';
-                printf('<a href="%s" class="nav-tab%s">%s</a>', esc_url(add_query_arg('tab', $tab_id)), esc_attr($active), esc_html($tab['title'] ?? $tab_id));
+                $active = ($current_tab === $tab_id) ? ' kp-wsf-tab-active' : '';
+                printf(
+                    '<a href="%s" class="kp-wsf-tab%s">%s</a>',
+                    esc_url(add_query_arg('tab', $tab_id)),
+                    esc_attr($active),
+                    esc_html($tab['title'] ?? $tab_id)
+                );
             }
             echo '</nav>';
 
-            // Render tab description if present.
+            echo '<div class="kp-wsf-tab-content">';
+
+            // Render tab description if present
             if (!empty($tabs[$current_tab]['description'])) {
                 printf(
                     '<p class="kp-wsf-tab-description">%s</p>',
@@ -408,8 +430,11 @@ if (! class_exists('\KP\WPFieldFramework\OptionsPage')) {
                 );
             }
 
-            // Render form with only current tab's sections.
+            // Render form with only current tab's sections
             $this->renderForm($current_tab);
+
+            echo '</div>'; // .kp-wsf-tab-content
+            echo '</div>'; // .kp-wsf-tabs-wrapper
         }
 
         /**
@@ -433,7 +458,33 @@ if (! class_exists('\KP\WPFieldFramework\OptionsPage')) {
                     do_settings_sections($this->config['menu_slug']);
                 }
 
-                submit_button($this->config['save_button'] ?? __('Save Settings', 'kp-wsf'));
+                // get the tab config if we're in a tab
+                $tab_config = (!empty($current_tab) && !empty($this->config['tabs'][$current_tab]))
+                    ? $this->config['tabs'][$current_tab]
+                    : [];
+
+                // hide the button if configured
+                if (empty($tab_config['hide_save_button']) && empty($this->config['hide_save_button'])) {
+                    submit_button($this->config['save_button'] ?? __('Save Settings', 'kp-wsf'));
+                }
+
+                // if we have more buttons to add, add them
+                if (!empty($tab_config['buttons'])) {
+                    echo '<div class="kp-wsf-tab-buttons">';
+                    foreach ($tab_config['buttons'] as $btn) {
+                        $type  = esc_attr($btn['type']  ?? 'button');
+                        $label = esc_html($btn['label'] ?? '');
+                        $class = esc_attr($btn['class'] ?? 'button button-secondary');
+                        $id    = !empty($btn['id']) ? sprintf(' id="%s"', esc_attr($btn['id'])) : '';
+                        $attrs = '';
+                        foreach (($btn['attributes'] ?? []) as $attr => $val) {
+                            $attrs .= sprintf(' %s="%s"', esc_attr($attr), esc_attr($val));
+                        }
+                        echo "<button type=\"{$type}\" class=\"{$class}\"{$id}{$attrs}>{$label}</button>";
+                    }
+                    echo '</div>';
+                }
+
                 $this->renderExportImport();
                 ?>
             </form>
@@ -468,13 +519,13 @@ if (! class_exists('\KP\WPFieldFramework\OptionsPage')) {
         {
             global $wp_settings_sections, $wp_settings_fields;
             $page = $this->config['menu_slug'];
-            if (! isset($wp_settings_sections[ $page ])) {
+            if (! isset($wp_settings_sections[$page])) {
                 return;
             }
 
-            foreach ($wp_settings_sections[ $page ] as $section_id => $section) {
+            foreach ($wp_settings_sections[$page] as $section_id => $section) {
                 // Check if section belongs to current tab.
-                if (! isset($this->sections[ $section_id ]) || $this->sections[ $section_id ]['tab'] !== $tab_id) {
+                if (! isset($this->sections[$section_id]) || $this->sections[$section_id]['tab'] !== $tab_id) {
                     continue;
                 }
 
@@ -492,7 +543,7 @@ if (! class_exists('\KP\WPFieldFramework\OptionsPage')) {
                     call_user_func($section['callback'], $section);
                 }
 
-                if (! isset($wp_settings_fields[ $page ][ $section_id ])) {
+                if (! isset($wp_settings_fields[$page][$section_id])) {
                     continue;
                 }
 
@@ -533,7 +584,7 @@ if (! class_exists('\KP\WPFieldFramework\OptionsPage')) {
 
             // Get current value from options.
             $options = $this->storage->getOption($this->config['option_key'], array());
-            $value = $options[ $field['id'] ] ?? ( $field['default'] ?? null );
+            $value = $options[$field['id']] ?? ($field['default'] ?? null);
 
             // Set the field name to use array notation for the option.
             $field['name'] = sprintf('%s[%s]', $this->config['option_key'], $field['id']);
@@ -568,7 +619,7 @@ if (! class_exists('\KP\WPFieldFramework\OptionsPage')) {
             $all_fields = array();
             foreach ($this->fields as $section_fields) {
                 foreach ($section_fields as $field) {
-                    $all_fields[ $field['id'] ] = $field;
+                    $all_fields[$field['id']] = $field;
                 }
             }
 
@@ -617,7 +668,7 @@ if (! class_exists('\KP\WPFieldFramework\OptionsPage')) {
                 $field = $all_fields[$field_id] ?? null;
                 if ($field) {
                     $type = $field['type'] ?? 'text';
-                    if (in_array($type, ['checkbox'], true) && !isset($input[$field_id])) {
+                    if (in_array($type, ['checkbox', 'switch'], true) && !isset($input[$field_id])) {
                         $sanitized[$field_id] = false;
                     }
                 }
@@ -647,7 +698,7 @@ if (! class_exists('\KP\WPFieldFramework\OptionsPage')) {
         public function getOption(string $key, mixed $default = null): mixed
         {
             $options = $this->getOptions();
-            return $options[ $key ] ?? $default;
+            return $options[$key] ?? $default;
         }
 
         /**
@@ -661,7 +712,7 @@ if (! class_exists('\KP\WPFieldFramework\OptionsPage')) {
         public function updateOption(string $key, mixed $value): bool
         {
             $options = $this->getOptions();
-            $options[ $key ] = $value;
+            $options[$key] = $value;
             return $this->storage->updateOption($this->config['option_key'], $options);
         }
 
@@ -675,7 +726,7 @@ if (! class_exists('\KP\WPFieldFramework\OptionsPage')) {
         public function deleteOption(string $key): bool
         {
             $options = $this->getOptions();
-            unset($options[ $key ]);
+            unset($options[$key]);
             return $this->storage->updateOption($this->config['option_key'], $options);
         }
 
@@ -694,7 +745,7 @@ if (! class_exists('\KP\WPFieldFramework\OptionsPage')) {
             <div class="kp-wsf-export-import">
                 <h2><?php esc_html_e('Export / Import Settings', 'kp-wsf'); ?></h2>
                 <p class="description"><?php esc_html_e('Export or import all settings for this options page, including all tabs.', 'kp-wsf'); ?></p>
-                
+
                 <div class="kp-wsf-export-import-columns">
                     <div class="kp-wsf-export-section">
                         <h3><?php esc_html_e('Export', 'kp-wsf'); ?></h3>
