@@ -403,17 +403,14 @@ if( ! class_exists( 'SGU_Static' ) ) {
                 return sprintf( '<!-- SGU Weather: Template not found: %s -->', esc_html( $file_path ) );
             }
 
-            // Start output buffering
-            ob_start( );
-
-            // Extract data to variables
-            extract( $data );
-
-            // Include the template
-            include $template;
-
-            // Return buffered content
-            return ob_get_clean( );
+            // Use a closure to isolate scope
+            $render = static function( string $__template, array $__data ) : string {
+                ob_start();
+                extract( $__data, EXTR_SKIP ); // EXTR_SKIP won't overwrite existing vars
+                include $__template;
+                return ob_get_clean();
+            };
+            return $render( $template, $data );
 
         }
 
@@ -886,7 +883,7 @@ if( ! class_exists( 'SGU_Static' ) ) {
             $cache_key = sprintf( "sgu_%s_archive_url", $shortcode );
             
             // Check cache first
-            $cached_url = false;//wp_cache_get( $cache_key, 'sgu_urls' );
+            $cached_url = wp_cache_get( $cache_key, 'sgu_urls' );
             if( $cached_url !== false ) {
                 return $cached_url;
             }
@@ -1309,7 +1306,7 @@ if( ! class_exists( 'SGU_Static' ) ) {
                 'waxing_crescent' => "<path d=\"M {$cx} 1 A " . ($r - 1) . " " . ($r - 1) . " 0 1 0 {$cx} " . ($size - 1) . " A " . ($r * 0.6) . " " . ($r - 1) . " 0 1 1 {$cx} 1\" fill=\"{$shadow}\"/>",
                 'first_quarter' => "<path d=\"M {$cx} 1 A " . ($r - 1) . " " . ($r - 1) . " 0 1 0 {$cx} " . ($size - 1) . " L {$cx} 1\" fill=\"{$shadow}\"/>",
                 'waxing_gibbous' => "<path d=\"M {$cx} 1 A " . ($r - 1) . " " . ($r - 1) . " 0 1 0 {$cx} " . ($size - 1) . " A " . ($r * 0.6) . " " . ($r - 1) . " 0 1 0 {$cx} 1\" fill=\"{$shadow}\"/>",
-                'full' => '',
+                'full', 'full_moon' => '',
                 'waning_gibbous' => "<path d=\"M {$cx} 1 A " . ($r - 1) . " " . ($r - 1) . " 0 1 1 {$cx} " . ($size - 1) . " A " . ($r * 0.6) . " " . ($r - 1) . " 0 1 1 {$cx} 1\" fill=\"{$shadow}\"/>",
                 'last_quarter' => "<path d=\"M {$cx} 1 A " . ($r - 1) . " " . ($r - 1) . " 0 1 1 {$cx} " . ($size - 1) . " L {$cx} 1\" fill=\"{$shadow}\"/>",
                 'waning_crescent' => "<path d=\"M {$cx} 1 A " . ($r - 1) . " " . ($r - 1) . " 0 1 1 {$cx} " . ($size - 1) . " A " . ($r * 0.6) . " " . ($r - 1) . " 0 1 0 {$cx} 1\" fill=\"{$shadow}\"/>",

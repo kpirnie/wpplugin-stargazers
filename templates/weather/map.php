@@ -27,4 +27,4 @@ defined( 'ABSPATH' ) || die( 'No direct script access allowed' );
     <h2><?php echo esc_html( $title ); ?></h2>
 <?php endif; ?>
 
-<iframe <?php echo $wrapper_attr; ?> style="width:100%;height:<?php echo $max_height; ?>px;" src="//embed.windy.com/embed2.html?lat=<?php echo $latitude; ?>&lon=<?php echo $longitude; ?>&zoom=7&overlay=<?php echo $map_layer; ?>&pressure=true&detailLat=<?php echo $latitude; ?>&detailLon=<?php echo $longitude; ?>&metricTemp=°F&product=ecmwf&level=surface&message=true&type=map&location=coordinates&radarRange=-1&pressure=true" frameborder="0" loading="lazy"></iframe>
+<iframe <?php echo esc_attr($wrapper_attr); ?> style="width:100%;height:<?php echo esc_attr($max_height); ?>px;" src="//embed.windy.com/embed2.html?lat=<?php echo esc_attr($latitude); ?>&lon=<?php echo esc_attr($longitude); ?>&zoom=7&overlay=<?php echo esc_attr($map_layer); ?>&pressure=true&detailLat=<?php echo esc_attr($latitude); ?>&detailLon=<?php echo esc_attr($longitude); ?>&metricTemp=°F&product=ecmwf&level=surface&message=true&type=map&location=coordinates&radarRange=-1&pressure=true" frameborder="0" loading="lazy"></iframe>

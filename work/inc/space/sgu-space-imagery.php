@@ -150,6 +150,15 @@ if( ! class_exists( 'SGU_Space_Imagery' ) ) {
                         // Check if upload succeeded
                         if( ! isset( $upload['error'] ) || ! $upload['error'] ) {
 
+                            // convert tiffs to pngs
+                            $converted_path = $this->convert_tif_for_upload( $upload['file'] );
+                            if( $converted_path !== $upload['file'] ) {
+                                $upload['file'] = $converted_path;
+                                $upload['url'] = preg_replace( '/\.tiff?$/i', '.png', $upload['url'] );
+                                $upload['type'] = 'image/png';
+                                $filepath = preg_replace( '/\.tiff?$/i', '.png', $filepath );
+                            }
+
                             // Prepare attachment post data
                             $attachment = [
                                 'post_title' => $filepath,
@@ -385,22 +394,13 @@ if( ! class_exists( 'SGU_Space_Imagery' ) ) {
                         // Check if upload succeeded
                         if( ! isset( $upload['error'] ) || ! $upload['error'] ) {
 
-                            // Convert TIF to JPG before inserting attachment
-                            $ext = strtolower( pathinfo( $upload['file'], PATHINFO_EXTENSION ) );
-                            if( in_array( $ext, ['tif', 'tiff'], true ) ) {
-                                $editor = wp_get_image_editor( $upload['file'] );
-                                if( ! is_wp_error( $editor ) ) {
-                                    $new_file = preg_replace( '/\.tiff?$/i', '.jpg', $upload['file'] );
-                                    $editor -> set_quality( 90 );
-                                    $saved = $editor -> save( $new_file, 'image/jpeg' );
-                                    if( ! is_wp_error( $saved ) ) {
-                                        @unlink( $upload['file'] ); // Delete TIF
-                                        $upload['file'] = $saved['path'];
-                                        $upload['url'] = preg_replace( '/\.tiff?$/i', '.jpg', $upload['url'] );
-                                        $upload['type'] = 'image/jpeg';
-                                        $filepath = preg_replace( '/\.tiff?$/i', '.jpg', $filepath );
-                                    }
-                                }
+                            // convert tiff images
+                            $converted_path = $this->convert_tif_for_upload( $upload['file'] );
+                            if( $converted_path !== $upload['file'] ) {
+                                $upload['file'] = $converted_path;
+                                $upload['url'] = preg_replace( '/\.tiff?$/i', '.png', $upload['url'] );
+                                $upload['type'] = 'image/png';
+                                $filepath = preg_replace( '/\.tiff?$/i', '.png', $filepath );
                             }
 
                             // Prepare attachment post data

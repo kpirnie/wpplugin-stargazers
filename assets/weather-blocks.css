@@ -1,0 +1,54 @@
+/**
+ * Weather Blocks - Placeholder & Loading Styles
+ * 
+ * Styles for the AJAX loading placeholders rendered by SGU_Weather_Blocks
+ * before the batch request completes and content is swapped in.
+ * 
+ * @package US Star Gazers
+ * @since 8.4
+ */
+
+/* Placeholder container — matches the block's expected footprint */
+.sgu-weather-placeholder {
+    width: 100%;
+    min-height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(20, 20, 40, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+}
+
+/* Inner loading wrapper */
+.sgu-weather-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.5rem;
+}
+
+/* Spinner element */
+.sgu-loading-spinner {
+    display: block;
+    width: 32px;
+    height: 32px;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    border-top-color: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    animation: sgu-spin 0.8s linear infinite;
+}
+
+@keyframes sgu-spin {
+    to { transform: rotate( 360deg ); }
+}
+
+/* Inline error message shown when a block fails to load */
+.sgu-weather-load-error {
+    padding: 1rem;
+    color: #f87171;
+    font-size: 0.875rem;
+    text-align: center;
+    margin: 0;
+}

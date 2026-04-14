@@ -209,7 +209,10 @@
 
         refreshWeather: function (e) {
             if (e) e.preventDefault();
-            window.location.reload();
+            // Re-trigger the AJAX batch loader instead of a full page reload
+            if ( typeof window.sguLoadWeatherBlocks === 'function' ) {
+                window.sguLoadWeatherBlocks();
+            }
         },
 
         showError: function (message) {

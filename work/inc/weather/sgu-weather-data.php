@@ -658,7 +658,7 @@ if( ! class_exists( 'SGU_Weather_Data' ) ) {
             }
 
             // make our request and return the response
-            $resp = SGU_Static::get_remote_data( $url, $args );
+            $resp = SGU_Static::get_remote_data( $url, $args['headers'] ?? [] );
             return $resp['body'] ?: [];
         }
 
