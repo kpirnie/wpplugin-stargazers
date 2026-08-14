@@ -1,0 +1,898 @@
+# Copyright (C) 2026 Kevin Pirnie
+# This file is distributed under the MIT.
+msgid ""
+msgstr ""
+"Project-Id-Version: US Star Gazers 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/sgup\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-08-14T10:48:21+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: sgup\n"
+
+#. Plugin Name of the plugin
+#: sgup.php
+msgid "US Star Gazers"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: sgup.php
+msgid "https://github.com/kpirnie/wpplugin-stargazers"
+msgstr ""
+
+#. Description of the plugin
+#: sgup.php
+msgid "Generates all the functionality needed to display the weather and space info for the site"
+msgstr ""
+
+#. Author of the plugin
+#: sgup.php
+msgid "Kevin Pirnie"
+msgstr ""
+
+#. Author URI of the plugin
+#: sgup.php
+msgid "https://kevinpirnie.com/"
+msgstr ""
+
+#: templates/astro/alerts/cme.php:75
+#: templates/astro/alerts/solar-flare.php:122
+msgid "Source Location:"
+msgstr ""
+
+#: templates/astro/alerts/cme.php:82
+#: templates/astro/alerts/solar-flare.php:136
+msgid "Instruments:"
+msgstr ""
+
+#: templates/astro/alerts/cme.php:97
+msgid "CME Analysis"
+msgstr ""
+
+#: templates/astro/alerts/cme.php:101
+msgid "Speed:"
+msgstr ""
+
+#: templates/astro/alerts/cme.php:108
+msgid "Type:"
+msgstr ""
+
+#: templates/astro/alerts/cme.php:115
+msgid "Direction:"
+msgstr ""
+
+#: templates/astro/alerts/cme.php:122
+msgid "Half Angle:"
+msgstr ""
+
+#: templates/astro/alerts/cme.php:129
+msgid "Analysis Note:"
+msgstr ""
+
+#: templates/astro/alerts/cme.php:138
+msgid "Note:"
+msgstr ""
+
+#: templates/astro/alerts/cme.php:145
+#: templates/astro/alerts/solar-flare.php:150
+msgid "Linked Events:"
+msgstr ""
+
+#: templates/astro/alerts/geomagnetic.php:70
+#: templates/astro/alerts/solar-flare.php:170
+msgid "Minor"
+msgstr ""
+
+#: templates/astro/alerts/geomagnetic.php:71
+#: templates/astro/alerts/solar-flare.php:169
+msgid "Moderate"
+msgstr ""
+
+#: templates/astro/alerts/geomagnetic.php:72
+#: templates/astro/alerts/solar-flare.php:168
+msgid "Strong"
+msgstr ""
+
+#: templates/astro/alerts/geomagnetic.php:73
+msgid "Severe"
+msgstr ""
+
+#: templates/astro/alerts/geomagnetic.php:74
+#: templates/astro/alerts/solar-flare.php:167
+msgid "Extreme"
+msgstr ""
+
+#: templates/astro/alerts/geomagnetic.php:77
+#: templates/astro/alerts/solar-flare.php:173
+msgid "Unknown"
+msgstr ""
+
+#: templates/astro/alerts/geomagnetic.php:104
+msgid "Storm Level:"
+msgstr ""
+
+#: templates/astro/alerts/geomagnetic.php:114
+msgid "Kp Index Values:"
+msgstr ""
+
+#: templates/astro/alerts/geomagnetic.php:135
+msgid "View Full Forecast"
+msgstr ""
+
+#: templates/astro/alerts/geomagnetic.php:146
+msgid "Potential Impacts:"
+msgstr ""
+
+#: templates/astro/alerts/geomagnetic.php:149
+msgid "Weak power grid fluctuations, minor satellite operations impact, aurora visible at high latitudes."
+msgstr ""
+
+#: templates/astro/alerts/geomagnetic.php:150
+msgid "Power systems may experience voltage alarms, satellite orientation corrections needed, aurora visible at higher latitudes."
+msgstr ""
+
+#: templates/astro/alerts/geomagnetic.php:151
+msgid "Voltage corrections required, surface charging on satellites, radio propagation affected, aurora visible at mid-latitudes."
+msgstr ""
+
+#: templates/astro/alerts/geomagnetic.php:152
+msgid "Widespread voltage control problems, spacecraft charging issues, HF radio propagation sporadic, aurora visible at lower latitudes."
+msgstr ""
+
+#: templates/astro/alerts/geomagnetic.php:153
+msgid "Grid systems may collapse, extensive spacecraft charging, HF radio blackout for days, aurora visible at tropical latitudes."
+msgstr ""
+
+#: templates/astro/alerts/latest.php:26
+msgid "CME Alert"
+msgstr ""
+
+#: templates/astro/alerts/latest.php:31
+msgid "Space Weather"
+msgstr ""
+
+#: templates/astro/alerts/latest.php:36
+msgid "Geomagnetic"
+msgstr ""
+
+#: templates/astro/alerts/latest.php:41
+msgid "Solar Flare"
+msgstr ""
+
+#: templates/astro/alerts/latest.php:100
+msgid "Class:"
+msgstr ""
+
+#: templates/astro/alerts/latest.php:102
+msgid "Location:"
+msgstr ""
+
+#: templates/astro/alerts/solar-flare.php:100
+msgid "Begin:"
+msgstr ""
+
+#: templates/astro/alerts/solar-flare.php:107
+msgid "Peak:"
+msgstr ""
+
+#: templates/astro/alerts/solar-flare.php:114
+msgid "End:"
+msgstr ""
+
+#: templates/astro/alerts/solar-flare.php:129
+msgid "Active Region:"
+msgstr ""
+
+#: templates/astro/alerts/solar-flare.php:171
+msgid "Minimal"
+msgstr ""
+
+#: templates/astro/alerts/space-weather.php:62
+msgid "K-index Alert"
+msgstr ""
+
+#: templates/astro/alerts/space-weather.php:63
+msgid "A-index Alert"
+msgstr ""
+
+#: templates/astro/alerts/space-weather.php:64
+msgid "Electron Flux Alert"
+msgstr ""
+
+#: templates/astro/alerts/space-weather.php:65
+msgid "Proton Event Alert"
+msgstr ""
+
+#: templates/astro/alerts/space-weather.php:66
+msgid "Type II/IV Alert"
+msgstr ""
+
+#: templates/astro/alerts/space-weather.php:67
+msgid "Summary"
+msgstr ""
+
+#: templates/astro/alerts/space-weather.php:68
+msgid "Warning"
+msgstr ""
+
+#: templates/astro/alerts/space-weather.php:69
+msgid "Watch"
+msgstr ""
+
+#: templates/astro/alerts/space-weather.php:72
+msgid "Space Weather Alert"
+msgstr ""
+
+#: templates/astro/alerts/space-weather.php:118
+msgid "High Priority"
+msgstr ""
+
+#: templates/astro/alerts/space-weather.php:119
+msgid "Moderate Priority"
+msgstr ""
+
+#: templates/astro/apod/archive.php:32
+msgid "Astronomy Picture of the Day Archive"
+msgstr ""
+
+#: templates/astro/apod/archive.php:34
+msgid "Explore NASA's stunning collection of astronomical images, updated daily since 1995."
+msgstr ""
+
+#: templates/astro/apod/archive.php:73
+msgid "Video"
+msgstr ""
+
+#: templates/astro/apod/archive.php:85
+msgid "View Details"
+msgstr ""
+
+#: templates/astro/apod/archive.php:104
+#: templates/astro/apod/home.php:102
+#: templates/astro/apod/single.php:55
+msgid "Credit:"
+msgstr ""
+
+#: templates/astro/apod/archive.php:119
+msgid "APOD Archive Pagination"
+msgstr ""
+
+#: templates/astro/apod/archive.php:129
+msgid "No astronomy photos found. Check back soon!"
+msgstr ""
+
+#: templates/astro/apod/home.php:44
+msgid "View All"
+msgstr ""
+
+#: templates/astro/apod/home.php:73
+#: templates/astro/apod/single.php:139
+msgid "Your browser does not support the video tag."
+msgstr ""
+
+#: templates/astro/apod/home.php:112
+msgid "Read More"
+msgstr ""
+
+#: templates/astro/apod/single.php:40
+msgid "Breadcrumb"
+msgstr ""
+
+#: templates/astro/apod/single.php:43
+msgid "Back to Archive"
+msgstr ""
+
+#: templates/astro/apod/single.php:75
+msgid "Click for full size"
+msgstr ""
+
+#: templates/astro/apod/single.php:150
+msgid "Media not available"
+msgstr ""
+
+#: templates/astro/apod/single.php:159
+msgid "Explanation"
+msgstr ""
+
+#: templates/astro/apod/single.php:170
+msgid "Share:"
+msgstr ""
+
+#: templates/astro/apod/single.php:176
+msgid "Share on Twitter"
+msgstr ""
+
+#: templates/astro/apod/single.php:185
+msgid "Share on Facebook"
+msgstr ""
+
+#: templates/astro/apod/single.php:193
+msgid "Source: NASA Astronomy Picture of the Day"
+msgstr ""
+
+#: templates/astro/apod/single.php:201
+msgid "Post navigation"
+msgstr ""
+
+#: templates/astro/apod/single.php:206
+msgid "Previous"
+msgstr ""
+
+#: templates/astro/apod/single.php:215
+msgid "Next"
+msgstr ""
+
+#: templates/astro/menu.php:34
+msgid "Astronomy Navigation"
+msgstr ""
+
+#: templates/astro/neos.php:62
+msgid "NEO Orbital Map Visualization"
+msgstr ""
+
+#: templates/astro/neos.php:111
+msgid "Potentially Hazardous"
+msgstr ""
+
+#: templates/astro/neos.php:116
+msgid "Close Approach:"
+msgstr ""
+
+#: templates/astro/neos.php:129
+msgid "Est. Diameter"
+msgstr ""
+
+#: templates/astro/neos.php:136
+msgid "Magnitude (H)"
+msgstr ""
+
+#: templates/astro/neos.php:143
+msgid "Miss Distance"
+msgstr ""
+
+#: templates/astro/neos.php:155
+msgid "Relative Velocity"
+msgstr ""
+
+#: templates/astro/neos.php:165
+msgid "Orbiting"
+msgstr ""
+
+#: templates/astro/neos.php:175
+msgid "All Close Approaches"
+msgstr ""
+
+#: templates/astro/neos.php:194
+msgid "View on NASA JPL"
+msgstr ""
+
+#: templates/astro/neos.php:195
+msgid "(opens in new tab)"
+msgstr ""
+
+#: templates/weather/alerts.php:64
+msgid "Please set your location to view weather alerts."
+msgstr ""
+
+#: templates/weather/alerts.php:74
+msgid "No active weather alerts for your area."
+msgstr ""
+
+#: templates/weather/alerts.php:86
+msgid "Active Alert"
+msgid_plural "Active Alerts"
+msgstr[0] ""
+msgstr[1] ""
+
+#: templates/weather/alerts.php:100
+msgid "Weather Alert"
+msgstr ""
+
+#: templates/weather/alerts.php:147
+msgid "Effective:"
+msgstr ""
+
+#: templates/weather/alerts.php:156
+msgid "Expires:"
+msgstr ""
+
+#: templates/weather/alerts.php:167
+msgid "View Full Description"
+msgstr ""
+
+#: templates/weather/alerts.php:176
+msgid "Recommended Actions"
+msgstr ""
+
+#: templates/weather/alerts.php:184
+msgid "Issued by:"
+msgstr ""
+
+#: templates/weather/current.php:39
+msgid "Please set your location to view weather information."
+msgstr ""
+
+#: templates/weather/current.php:47
+msgid "Unable to retrieve weather data. Please try again later."
+msgstr ""
+
+#: templates/weather/current.php:78
+msgid "Feels like"
+msgstr ""
+
+#: templates/weather/current.php:95
+#: templates/weather/hourly.php:124
+#: templates/weather/week-extended.php:165
+msgid "Humidity"
+msgstr ""
+
+#: templates/weather/current.php:103
+#: templates/weather/hourly.php:129
+#: templates/weather/week-extended.php:144
+#: templates/weather/week.php:125
+msgid "Wind"
+msgstr ""
+
+#: templates/weather/current.php:116
+msgid "Pressure"
+msgstr ""
+
+#: templates/weather/current.php:124
+#: templates/weather/hourly.php:135
+msgid "Cloud Cover"
+msgstr ""
+
+#: templates/weather/current.php:132
+msgid "Visibility"
+msgstr ""
+
+#: templates/weather/current.php:140
+msgid "Wind Gusts"
+msgstr ""
+
+#: templates/weather/current.php:151
+#: templates/weather/week.php:147
+msgid "Sunrise"
+msgstr ""
+
+#: templates/weather/current.php:156
+#: templates/weather/week.php:150
+msgid "Sunset"
+msgstr ""
+
+#: templates/weather/current.php:169
+#: templates/weather/week-extended.php:200
+msgid "Last updated:"
+msgstr ""
+
+#: templates/weather/dashboard.php:75
+#: work/inc/weather/sgu-weather-blocks.php:280
+#: work/inc/weather/sgu-weather-blocks.php:295
+msgid "Set Your Location"
+msgstr ""
+
+#: templates/weather/dashboard.php:76
+msgid "Please set your location to view your personalized weather dashboard."
+msgstr ""
+
+#: templates/weather/dashboard.php:90
+msgid "Weather Alerts"
+msgstr ""
+
+#: templates/weather/dashboard.php:106
+msgid "Current Weather"
+msgstr ""
+
+#: templates/weather/dashboard.php:123
+msgid "Today's Forecast"
+msgstr ""
+
+#: templates/weather/dashboard.php:143
+msgid "Hourly Forecast"
+msgstr ""
+
+#: templates/weather/dashboard.php:160
+msgid "7-Day Forecast"
+msgstr ""
+
+#: templates/weather/dashboard.php:179
+msgid "Extended Forecast"
+msgstr ""
+
+#: templates/weather/day.php:42
+msgid "Please set your location to view the forecast."
+msgstr ""
+
+#: templates/weather/day.php:50
+#: templates/weather/week.php:49
+msgid "Unable to retrieve forecast data. Please try again later."
+msgstr ""
+
+#: templates/weather/day.php:94
+msgid "Detailed Forecast"
+msgstr ""
+
+#: templates/weather/day.php:123
+msgid "Hourly Breakdown"
+msgstr ""
+
+#: templates/weather/hourly.php:39
+msgid "Please set your location to view the hourly forecast."
+msgstr ""
+
+#: templates/weather/hourly.php:47
+msgid "Unable to retrieve hourly forecast data. Please try again later."
+msgstr ""
+
+#: templates/weather/hourly.php:107
+msgid "Feels"
+msgstr ""
+
+#: templates/weather/hourly.php:118
+#: templates/weather/week.php:119
+msgid "Precipitation Chance"
+msgstr ""
+
+#: templates/weather/partials/location-form.php:23
+msgid "Use My Location"
+msgstr ""
+
+#: templates/weather/partials/location-form.php:28
+msgid "or"
+msgstr ""
+
+#: templates/weather/partials/location-form.php:33
+#: templates/weather/partials/location-form.php:43
+msgid "ZIP Code"
+msgstr ""
+
+#: templates/weather/partials/location-form.php:42
+msgid "Enter ZIP Code"
+msgstr ""
+
+#: templates/weather/partials/location-form.php:44
+msgid "Go"
+msgstr ""
+
+#: templates/weather/partials/location-form.php:48
+msgid "Cancel"
+msgstr ""
+
+#: templates/weather/partials/location-picker-inline.php:42
+msgid "Change location"
+msgstr ""
+
+#: templates/weather/partials/location-picker-inline.php:45
+msgid "Change"
+msgstr ""
+
+#: templates/weather/partials/location-picker-inline.php:58
+msgid "Set your location for local weather"
+msgstr ""
+
+#: templates/weather/partials/location-picker-inline.php:62
+msgid "Set location"
+msgstr ""
+
+#: templates/weather/partials/location-picker-inline.php:65
+msgid "Set Location"
+msgstr ""
+
+#: templates/weather/week-extended.php:38
+msgid "Please set your location to view the extended forecast."
+msgstr ""
+
+#: templates/weather/week-extended.php:46
+msgid "Unable to retrieve extended forecast data. Please try again later."
+msgstr ""
+
+#: templates/weather/week-extended.php:101
+msgid "Daytime"
+msgstr ""
+
+#: templates/weather/week-extended.php:101
+msgid "Overnight"
+msgstr ""
+
+#: templates/weather/week-extended.php:157
+msgid "Precip Chance"
+msgstr ""
+
+#: templates/weather/week-extended.php:173
+msgid "Dewpoint"
+msgstr ""
+
+#: templates/weather/week-extended.php:205
+msgid "Data provided by NOAA/National Weather Service"
+msgstr ""
+
+#: templates/weather/week.php:41
+msgid "Please set your location to view the weekly forecast."
+msgstr ""
+
+#: templates/weather/week.php:88
+msgid "Today"
+msgstr ""
+
+#: templates/weather/week.php:137
+msgid "UV Index"
+msgstr ""
+
+#: templates/weather/week.php:168
+msgid "Extended Forecast Details"
+msgstr ""
+
+#: work/inc/cpt/sgu-cpt-admin-cols.php:76
+#: work/inc/cpt/sgu-cpt-admin-cols.php:90
+msgid "Select All"
+msgstr ""
+
+#: work/inc/cpt/sgu-cpt-admin-cols.php:77
+#: work/inc/cpt/sgu-cpt-admin-cols.php:92
+msgid "Title"
+msgstr ""
+
+#: work/inc/cpt/sgu-cpt-admin-cols.php:78
+#: work/inc/cpt/sgu-cpt-admin-cols.php:93
+msgid "Date"
+msgstr ""
+
+#: work/inc/cpt/sgu-cpt-admin-cols.php:91
+msgid "Media"
+msgstr ""
+
+#: work/inc/cpt/sgu-cpt-settings.php:93
+msgid "US Stargazers CME Settings"
+msgstr ""
+
+#: work/inc/cpt/sgu-cpt-settings.php:94
+#: work/inc/cpt/sgu-cpt-settings.php:154
+#: work/inc/cpt/sgu-cpt-settings.php:220
+#: work/inc/cpt/sgu-cpt-settings.php:259
+#: work/inc/cpt/sgu-cpt-settings.php:299
+#: work/inc/cpt/sgu-cpt-settings.php:366
+msgid "Settings"
+msgstr ""
+
+#: work/inc/cpt/sgu-cpt-settings.php:104
+#: work/inc/cpt/sgu-cpt-settings.php:164
+#: work/inc/cpt/sgu-cpt-settings.php:230
+#: work/inc/cpt/sgu-cpt-settings.php:269
+#: work/inc/cpt/sgu-cpt-settings.php:309
+#: work/inc/cpt/sgu-cpt-settings.php:382
+msgid "Endpoint"
+msgstr ""
+
+#: work/inc/cpt/sgu-cpt-settings.php:105
+#: work/inc/cpt/sgu-cpt-settings.php:165
+#: work/inc/cpt/sgu-cpt-settings.php:310
+#: work/inc/cpt/sgu-cpt-settings.php:383
+#, php-format
+msgid "See here to get your endpoint: https://api.nasa.gov/. If your endpont needs a key attached to it, add it with a %s"
+msgstr ""
+
+#: work/inc/cpt/sgu-cpt-settings.php:110
+#: work/inc/cpt/sgu-cpt-settings.php:176
+#: work/inc/cpt/sgu-cpt-settings.php:321
+#: work/inc/cpt/sgu-cpt-settings.php:394
+msgid "API Keys"
+msgstr ""
+
+#: work/inc/cpt/sgu-cpt-settings.php:111
+#: work/inc/cpt/sgu-cpt-settings.php:177
+#: work/inc/cpt/sgu-cpt-settings.php:322
+#: work/inc/cpt/sgu-cpt-settings.php:395
+msgid "See here to get your API keys: https://api.nasa.gov/"
+msgstr ""
+
+#: work/inc/cpt/sgu-cpt-settings.php:116
+#: work/inc/cpt/sgu-cpt-settings.php:122
+#: work/inc/cpt/sgu-cpt-settings.php:182
+#: work/inc/cpt/sgu-cpt-settings.php:188
+#: work/inc/cpt/sgu-cpt-settings.php:327
+#: work/inc/cpt/sgu-cpt-settings.php:333
+#: work/inc/cpt/sgu-cpt-settings.php:400
+#: work/inc/cpt/sgu-cpt-settings.php:406
+#: work/inc/sgu-settings.php:139
+msgid "Key"
+msgstr ""
+
+#: work/inc/cpt/sgu-cpt-settings.php:117
+#: work/inc/cpt/sgu-cpt-settings.php:183
+#: work/inc/cpt/sgu-cpt-settings.php:328
+#: work/inc/cpt/sgu-cpt-settings.php:401
+#: work/inc/sgu-settings.php:140
+msgid "Add a Key"
+msgstr ""
+
+#: work/inc/cpt/sgu-cpt-settings.php:153
+msgid "US Stargazers Solar Flare Settings"
+msgstr ""
+
+#: work/inc/cpt/sgu-cpt-settings.php:170
+#: work/inc/cpt/sgu-cpt-settings.php:315
+#: work/inc/cpt/sgu-cpt-settings.php:388
+msgid "Use CME Keys?"
+msgstr ""
+
+#: work/inc/cpt/sgu-cpt-settings.php:171
+#: work/inc/cpt/sgu-cpt-settings.php:316
+#: work/inc/cpt/sgu-cpt-settings.php:389
+msgid "Should we use the same keys you set for the CME's?"
+msgstr ""
+
+#: work/inc/cpt/sgu-cpt-settings.php:219
+msgid "US Stargazers Geo-Magnetic Settings"
+msgstr ""
+
+#: work/inc/cpt/sgu-cpt-settings.php:231
+msgid "See here to get your endpoint: https://services.swpc.noaa.gov/text/"
+msgstr ""
+
+#: work/inc/cpt/sgu-cpt-settings.php:258
+msgid "US Stargazers Space Weather Settings"
+msgstr ""
+
+#: work/inc/cpt/sgu-cpt-settings.php:270
+msgid "See here to get your endpoint: https://services.swpc.noaa.gov/products/"
+msgstr ""
+
+#: work/inc/cpt/sgu-cpt-settings.php:298
+msgid "US Stargazers Near Earth Object Settings"
+msgstr ""
+
+#: work/inc/cpt/sgu-cpt-settings.php:365
+msgid "US Stargazers Astronomy Photo of the Day Settings"
+msgstr ""
+
+#: work/inc/cpt/sgu-cpt-settings.php:376
+msgid "Archive Page"
+msgstr ""
+
+#: work/inc/cpt/sgu-cpt-settings.php:377
+msgid "Select the page to use as the archive page for the photo journal articles."
+msgstr ""
+
+#: work/inc/cpt/sgu-cpts.php:155
+#: work/inc/cpt/sgu-cpts.php:157
+msgid "CME Alerts"
+msgstr ""
+
+#: work/inc/cpt/sgu-cpts.php:156
+#: work/inc/cpt/sgu-cpts.php:166
+#: work/inc/cpt/sgu-cpts.php:176
+#: work/inc/cpt/sgu-cpts.php:186
+msgid "Alert"
+msgstr ""
+
+#: work/inc/cpt/sgu-cpts.php:165
+#: work/inc/cpt/sgu-cpts.php:167
+msgid "Solar Flare Alerts"
+msgstr ""
+
+#: work/inc/cpt/sgu-cpts.php:175
+#: work/inc/cpt/sgu-cpts.php:177
+msgid "Geo Magnetic Alerts"
+msgstr ""
+
+#: work/inc/cpt/sgu-cpts.php:185
+#: work/inc/cpt/sgu-cpts.php:187
+msgid "Space Weather Alerts"
+msgstr ""
+
+#: work/inc/cpt/sgu-cpts.php:195
+msgid "NASA Near Earth Objects"
+msgstr ""
+
+#: work/inc/cpt/sgu-cpts.php:196
+msgid "NEO"
+msgstr ""
+
+#: work/inc/cpt/sgu-cpts.php:197
+msgid "NASA NEOs"
+msgstr ""
+
+#: work/inc/cpt/sgu-cpts.php:206
+msgid "NASA Astronomy Photo of the Day"
+msgstr ""
+
+#: work/inc/cpt/sgu-cpts.php:207
+msgid "Photo of the Day"
+msgstr ""
+
+#: work/inc/cpt/sgu-cpts.php:208
+msgid "NASA APOD"
+msgstr ""
+
+#: work/inc/sgu-plugin.php:73
+msgid "<h1>PHP To Low</h1><p>Due to the nature of this plugin, it cannot be run on lower versions of PHP.</p><p>Please contact your hosting provider to upgrade your site to at least version 8.4.</p>"
+msgstr ""
+
+#: work/inc/sgu-plugin.php:74
+msgid "Cannot Activate: PHP To Low"
+msgstr ""
+
+#: work/inc/sgu-plugin.php:86
+msgid "<h1>Cannot Network Activate</h1><p>Due to the nature of this plugin, it cannot be network activated.</p><p>Please go back, and activate inside your subsites.</p>"
+msgstr ""
+
+#: work/inc/sgu-plugin.php:87
+msgid "Cannot Network Activate"
+msgstr ""
+
+#: work/inc/sgu-settings.php:115
+msgid "Open-Meteo"
+msgstr ""
+
+#: work/inc/sgu-settings.php:116
+#: work/inc/sgu-settings.php:187
+msgid "Open-Meteo provides free weather data without requiring an API key. No configuration needed for basic weather functionality."
+msgstr ""
+
+#: work/inc/sgu-settings.php:121
+msgid "NOAA User Agent (Optional)"
+msgstr ""
+
+#: work/inc/sgu-settings.php:122
+msgid "NOAA Weather API does not require keys, but you can customize the User-Agent string. See: https://www.weather.gov/documentation/services-web-api"
+msgstr ""
+
+#: work/inc/sgu-settings.php:133
+msgid "AstronomyAPI Keys"
+msgstr ""
+
+#: work/inc/sgu-settings.php:134
+msgid "See here to obtain the keys: https://docs.astronomyapi.com/"
+msgstr ""
+
+#: work/inc/sgu-settings.php:145
+msgid "App ID"
+msgstr ""
+
+#: work/inc/sgu-settings.php:151
+msgid "App Secret"
+msgstr ""
+
+#: work/inc/sgu-settings.php:178
+msgid "API Endpoints"
+msgstr ""
+
+#: work/inc/sgu-settings.php:181
+msgid "Endpoints"
+msgstr ""
+
+#: work/inc/sgu-settings.php:186
+msgid "Open-Meteo Endpoints"
+msgstr ""
+
+#: work/inc/sgu-settings.php:192
+msgid "NOAA Endpoints"
+msgstr ""
+
+#: work/inc/sgu-settings.php:193
+msgid "NOAA endpoints are pre-configured. See: https://www.weather.gov/documentation/services-web-api"
+msgstr ""
+
+#: work/inc/sgu-settings.php:198
+msgid "AstronomyAPI Endpoint"
+msgstr ""
+
+#: work/inc/sgu-settings.php:199
+msgid "Astronomy API Endpoint can be found here: https://docs.astronomyapi.com/"
+msgstr ""
+
+#: work/inc/sgu-static.php:131
+msgid "Watch Video"
+msgstr ""
+
+#: work/inc/space/sgu-space-blocks.php:779
+msgid "Space"
+msgstr ""
+
+#: work/inc/space/sgu-space-blocks.php:783
+msgid "Weather"
+msgstr ""

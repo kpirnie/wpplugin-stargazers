@@ -1,16 +1,23 @@
-# Kev's Plugin Base Repo
+Run the regular syncs on cron. The historical commands are one-time bulk imports.
 
-[![GitHub Issues](https://img.shields.io/github/issues/kpirnie/wpplugin-kp-agent-ready?style=for-the-badge&logo=github&color=006400&logoColor=white&labelColor=000)](https://github.com/kpirnie/wpplugin-kp-agent-ready/issues)
-[![Last Commit](https://img.shields.io/github/last-commit/kpirnie/wpplugin-kp-agent-ready?style=for-the-badge&labelColor=000)](https://github.com/kpirnie/wpplugin-kp-agent-ready/commits/main)
-[![MIT](https://img.shields.io/badge/License-MIT-orange.svg?style=for-the-badge&logo=opensourceinitiative&logoColor=white&labelColor=000)](LICENSE)
+## Data sources
 
-[![PHP](https://img.shields.io/badge/Min.%20php8.2-777BB4?logo=php&logoColor=white&style=for-the-badge&labelColor=000)](https://php.net)
-[![WordPress](https://img.shields.io/badge/Min.%20WP-6.8-3858e9?logo=wordpress&logoColor=white&style=for-the-badge&labelColor=000)](https://wordpress.org)
-[![Kevin Pirnie](https://img.shields.io/badge/-KevinPirnie.com-000d2d?style=for-the-badge&labelColor=000&logoColor=white&logo=data:image/svg%2Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+CiAgPGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiLz4KICA8ZWxsaXBzZSBjeD0iMTIiIGN5PSIxMiIgcng9IjQuNSIgcnk9IjEwIi8+CiAgPGxpbmUgeDE9IjIiIHkxPSIxMiIgeDI9IjIyIiB5Mj0iMTIiLz4KICA8bGluZSB4MT0iNC41IiB5MT0iNi41IiB4Mj0iMTkuNSIgeTI9IjYuNSIvPgogIDxsaW5lIHgxPSI0LjUiIHkxPSIxNy41IiB4Mj0iMTkuNSIgeTI9IjE3LjUiLz4KPC9zdmc+Cg==)](https://kevinpirnie.com/)
+- [NOAA / National Weather Service](https://www.weather.gov/documentation/services-web-api) — forecasts and alerts
+- [NOAA SWPC](https://services.swpc.noaa.gov/) — space weather
+- [NASA APIs](https://api.nasa.gov/) — APOD, NEO, DONKI
+- [Open-Meteo](https://open-meteo.com/) — forecast fallback and geocoding
+- [USNO](https://aa.usno.navy.mil/) — rise, set, and transit times
 
-Just a simple structure for my plugins.  Use it how you see fit.
+## Development
 
-Read the READ_ME_FIRST.txt for instruction for how this should be utilized.
+```bash
+composer install
+npm install
+npm run start     # watch the blocks
+npm run build     # compile blocks, then build into distribute/
+```
+
+Work in `source/`. Never edit `distribute/` — it is wiped and rebuilt on every build, and it is committed because the release zip and the GitHub updater are both made from it.
 
 ## License
 

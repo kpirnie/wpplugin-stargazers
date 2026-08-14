@@ -31,7 +31,7 @@ echo "# Building ${NAME} ${VERSION}"
 # clean out the distribution
 echo "# Cleaning Up Distribution"
 rm -rf "${DIST}"
-mkdir -p "${DIST}/assets/css" "${DIST}/assets/js" "${DIST}/languages"
+mkdir -p "${DIST}/assets" "${DIST}/build" "${DIST}/languages"
 
 # copy the php, the index guards, and the readme
 echo "# Working on Templates"
@@ -49,8 +49,22 @@ ESBUILD="${ROOT}/node_modules/.bin/esbuild"
 if [ ! -x "${ESBUILD}" ]; then
     npm install --silent --no-audit --no-fund --prefix "${ROOT}"
 fi
-"${ESBUILD}" "${SRC}/assets/css/style.css" --minify --outfile="${DIST}/assets/css/style.css" --log-level=warning
-"${ESBUILD}" "${SRC}/assets/js/script.js" --minify --outfile="${DIST}/assets/js/script.js" --log-level=warning
+for _asset in "${SRC}"/assets/*.css "${SRC}"/assets/*.js; do
+    [ -f "${_asset}" ] || continue
+    "${ESBUILD}" "${_asset}" --minify --outfile="${DIST}/assets/$( basename "${_asset}" )" --log-level=warning
+done
+# ship the third party assets verbatim, they are already minified
+if [ -d "${SRC}/assets/vendor" ]; then
+    rsync -a "${SRC}/assets/vendor/" "${DIST}/assets/vendor/"
+fi
+
+# the compiled blocks bundle, built by wp-scripts before we get here
+echo "# Working on Blocks"
+if [ ! -f "${SRC}/build/blocks.js" ]; then
+    echo "! source/build/blocks.js is missing - run 'npm run blocks' first"
+    exit 1
+fi
+"${ESBUILD}" "${SRC}/build/blocks.js" --minify --outfile="${DIST}/build/blocks.js" --log-level=warning
 
 # ship the composer manifest and build the autoloader against the distributed tree
 echo "# Working on Vendor"

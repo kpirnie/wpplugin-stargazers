@@ -1,11 +1,15 @@
 {
-    "name": "stargazers-plugin",
-    "version": "1.0.0",
-    "scripts": {
-        "build": "wp-scripts build",
-        "start": "wp-scripts start"
-    },
-    "devDependencies": {
-        "@wordpress/scripts": "^31.1.0"
-    }
+  "name": "sgup",
+  "version": "1.0.0",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "blocks": "wp-scripts build",
+    "start": "wp-scripts start",
+    "build": "npm run blocks && ./build.sh"
+  },
+  "devDependencies": {
+    "@wordpress/scripts": "^31.1.0",
+    "esbuild": "latest"
+  }
 }

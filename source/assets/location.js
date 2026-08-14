@@ -21,6 +21,7 @@
             $(document).on('click', '.sgu-weather-change-location', this.showLocationPicker.bind(this));
             $(document).on('click', '.sgu-weather-cancel-change', this.hideLocationPicker.bind(this));
             $(document).on('click', '.sgu-weather-refresh', this.refreshWeather.bind(this));
+            $(document).on('click', '[data-action="toggle-location-form"]', this.toggleLocationForm.bind(this));
         },
 
         checkInitialLocation: function () {
@@ -205,6 +206,19 @@
             if (e) e.preventDefault();
             $('.sgu-weather-location-prompt').removeClass('active').hide();
             $('.sgu-weather-has-location').show();
+            $('.sgu-location-form-wrapper').attr('aria-hidden', 'true').hide();
+        },
+
+        toggleLocationForm: function (e) {
+            if (e) e.preventDefault();
+
+            const $wrapper = $(e.currentTarget)
+                .closest('.sgu-location-picker-inline')
+                .find('.sgu-location-form-wrapper');
+
+            const isHidden = $wrapper.attr('aria-hidden') === 'true';
+
+            $wrapper.attr('aria-hidden', isHidden ? 'false' : 'true').toggle(isHidden);
         },
 
         refreshWeather: function (e) {
