@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<ruleset name="US Star Gazers">
+    <description>Coding standards for the US Star Gazers plugin</description>
+
+    <file>./source</file>
+
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+    <exclude-pattern>*/node_modules/*</exclude-pattern>
+    <exclude-pattern>./source/build/*</exclude-pattern>
+    <exclude-pattern>./distribute/*</exclude-pattern>
+
+    <arg name="extensions" value="php"/>
+    <arg name="basepath" value="."/>
+    <arg name="colors"/>
+    <arg name="parallel" value="8"/>
+    <arg value="sp"/>
+
+    <config name="minimum_wp_version" value="6.8"/>
+    <config name="testVersion" value="8.4-"/>
+
+    <rule ref="WordPress"/>
+    <rule ref="PHPCompatibilityWP"/>
+
+    <rule ref="WordPress.WP.I18n">
+        <properties>
+            <property name="text_domain" type="array">
+                <element value="sgup"/>
+            </property>
+        </properties>
+    </rule>
+
+    <rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+        <properties>
+            <property name="prefixes" type="array">
+                <element value="sgup"/>
+                <element value="sgu"/>
+            </property>
+        </properties>
+    </rule>
+</ruleset>

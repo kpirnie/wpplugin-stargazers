@@ -1,173 +1,206 @@
 <?php
 
-/** 
+/**
  * Plugin Class
- * 
+ *
  * This is the primary plugin class file. It will be responsible for pulling together everything for us to use
- * 
+ *
  * @since 8.4
  * @author Kevin Pirnie <me@kpirnie.com>
  * @package US Stargazers Plugin
- * 
  */
 
 // We don't want to allow direct access to this
-defined('ABSPATH') || die('No direct script access allowed');
+defined( 'ABSPATH' ) || die( 'No direct script access allowed' );
 
-if (! class_exists('SGUP')) {
+if ( ! class_exists( 'SGUP' ) ) {
 
-    /** 
-     * Class SGUP
-     * 
-     * The primary theme class
-     * 
-     * @since 8.4
-     * @access public
-     * @author Kevin Pirnie <me@kpirnie.com>
-     * @package US Stargazers Plugin
-     * 
-     */
-    class SGUP
-    {
+	/**
+	 * Class SGUP
+	 *
+	 * The primary theme class
+	 *
+	 * @since 8.4
+	 * @access public
+	 * @author Kevin Pirnie <me@kpirnie.com>
+	 * @package US Stargazers Plugin
+	 */
+	class SGUP {
 
-        /** 
-         * init
-         * 
-         * Initilize the plugin
-         * 
-         * @since 8.4
-         * @access public
-         * @author Kevin Pirnie <me@kpirnie.com>
-         * @package US Stargazers Plugin
-         * 
-         */
-        public function init(): void
-        {
 
-            // hold our classes and the public method we'll be using
-            $plugin_classes = array(
-                ['class' => 'SGU_Plugin', 'method' => null],
-                ['class' => 'SGU_CPTs', 'method' => null],
-                ['class' => 'SGU_CPT_Settings', 'method' => null],
-                ['class' => 'SGU_CPT_Admin_Cols', 'method' => null],
-                ['class' => 'SGU_Settings', 'method' => null],
-                ['class' => 'SGU_Sync', 'method' => '__init'],
-                ['class' => 'SGU_Space_Blocks', 'method' => null],
-                ['class' => 'SGU_Weather_Location', 'method' => null],
-                ['class' => 'SGU_Weather_Blocks', 'method' => null],
-                ['class' => 'SGU_Space_API', 'method' => null],
-                ['class' => 'SGU_USNO_API', 'method' => null],
-            );
+		/**
+		 * init
+		 *
+		 * Initilize the plugin
+		 *
+		 * @since 8.4
+		 * @access public
+		 * @author Kevin Pirnie <me@kpirnie.com>
+		 * @package US Stargazers Plugin
+		 */
+		public function init(): void {
 
-            // loop over each item
-            foreach ($plugin_classes as $item) {
+			// hold our classes and the public method we'll be using
+			$plugin_classes = array(
+				array(
+					'class'  => 'SGU_Plugin',
+					'method' => null,
+				),
+				array(
+					'class'  => 'SGU_CPTs',
+					'method' => null,
+				),
+				array(
+					'class'  => 'SGU_CPT_Settings',
+					'method' => null,
+				),
+				array(
+					'class'  => 'SGU_CPT_Admin_Cols',
+					'method' => null,
+				),
+				array(
+					'class'  => 'SGU_Settings',
+					'method' => null,
+				),
+				array(
+					'class'  => 'SGU_Sync',
+					'method' => '__init',
+				),
+				array(
+					'class'  => 'SGU_Space_Blocks',
+					'method' => null,
+				),
+				array(
+					'class'  => 'SGU_Weather_Location',
+					'method' => null,
+				),
+				array(
+					'class'  => 'SGU_Weather_Blocks',
+					'method' => null,
+				),
+				array(
+					'class'  => 'SGU_Space_API',
+					'method' => null,
+				),
+				array(
+					'class'  => 'SGU_USNO_API',
+					'method' => null,
+				),
+			);
 
-                // make sure the class actually exists
-                if (class_exists($item['class'])) {
+			// loop over each item
+			foreach ( $plugin_classes as $item ) {
 
-                    // fire it up
-                    $instance = new $item['class']();
+				// make sure the class actually exists
+				if ( class_exists( $item['class'] ) ) {
 
-                    // if the method is empty
-                    if (empty($item['method'])) {
+					// fire it up
+					$instance = new $item['class']();
 
-                        // fire up the class initializers
-                        $instance->init();
+					// if the method is empty
+					if ( empty( $item['method'] ) ) {
 
-                        // otherwise
-                    } else {
+						// fire up the class initializers
+						$instance->init();
 
-                        // fire up the class initializers
-                        $instance->{$item['method']}();
-                    }
+						// otherwise
+					} else {
 
-                    // now clean up the instance
-                    unset($instance);
-                }
-            }
+						// fire up the class initializers
+						$instance->{$item['method']}();
+					}
 
-            // now we can clean up the class array
-            unset($theme_classes);
+					// now clean up the instance
+					unset( $instance );
+				}
+			}
 
-            // Add a couple mime types to allow for uploads
-            add_filter('upload_mimes', function ($mimes) {
-                $mimes['gif'] = 'image/gif';
-                $mimes['svg'] = 'image/svg+xml';
-                $mimes['svgz'] = 'image/svg+xml';
-                return $mimes;
-            });
+			// now we can clean up the class array
+			unset( $theme_classes );
 
-            // register the scripts and styles
-            add_action('wp_enqueue_scripts', [$this, 'register_light_pollution_assets']);
+			// Add a couple mime types to allow for uploads
+			add_filter(
+				'upload_mimes',
+				function ( $mimes ) {
+					$mimes['gif']  = 'image/gif';
+					$mimes['svg']  = 'image/svg+xml';
+					$mimes['svgz'] = 'image/svg+xml';
+					return $mimes;
+				}
+			);
 
-            // hopefully this helps with apod videos
-            add_action('send_headers', function () {
-                header_remove('X-Frame-Options');
-            });
-        }
+			// register the scripts and styles
+			add_action( 'wp_enqueue_scripts', array( $this, 'register_light_pollution_assets' ) );
 
-        /**
-         * Register light pollution map assets
-         * 
-         */
-        function register_light_pollution_assets(): void
-        {
+			// hopefully this helps with apod videos
+			add_action(
+				'send_headers',
+				function () {
+					header_remove( 'X-Frame-Options' );
+				}
+			);
+		}
 
-            $plugin_url = plugins_url('/', SGUP_PATH . '/' . SGUP_FILENAME);
-            $version    = defined('WP_DEBUG') && WP_DEBUG ? time() : '8.4.0';
+		/**
+		 * Register light pollution map assets
+		 */
+		function register_light_pollution_assets(): void {
 
-            // Register Leaflet CSS
-            wp_register_style(
-                'leaflet',
-                $plugin_url . 'assets/vendor/leaflet/leaflet.css',
-                [],
-                '1.9.4'
-            );
+			$plugin_url = plugins_url( '/', SGUP_PATH . '/' . SGUP_FILENAME );
+			$version    = defined( 'WP_DEBUG' ) && WP_DEBUG ? time() : '8.4.0';
 
-            // Register Leaflet JS
-            wp_register_script(
-                'leaflet',
-                $plugin_url . 'assets/vendor/leaflet/leaflet.js',
-                [],
-                '1.9.4',
-                true
-            );
+			// Register Leaflet CSS
+			wp_register_style(
+				'leaflet',
+				$plugin_url . 'assets/vendor/leaflet/leaflet.css',
+				array(),
+				'1.9.4'
+			);
 
-            // Register light pollution map CSS
-            wp_register_style(
-                'sgu-light-pollution-map',
-                $plugin_url . 'assets/light-pollution-map.css',
-                ['leaflet'],
-                $version
-            );
+			// Register Leaflet JS
+			wp_register_script(
+				'leaflet',
+				$plugin_url . 'assets/vendor/leaflet/leaflet.js',
+				array(),
+				'1.9.4',
+				true
+			);
 
-            // Register light pollution map JS
-            wp_register_script(
-                'sgu-light-pollution-map',
-                $plugin_url . 'assets/light-pollution-map.js',
-                ['leaflet'],
-                $version,
-                true
-            );
+			// Register light pollution map CSS
+			wp_register_style(
+				'sgu-light-pollution-map',
+				$plugin_url . 'assets/light-pollution-map.css',
+				array( 'leaflet' ),
+				$version
+			);
 
-            // Register placeholder/loading spinner styles for AJAX weather blocks
-            wp_register_style(
-                'sgu-weather-blocks',
-                $plugin_url . 'assets/weather-blocks.css',
-                [],
-                $version
-            );
+			// Register light pollution map JS
+			wp_register_script(
+				'sgu-light-pollution-map',
+				$plugin_url . 'assets/light-pollution-map.js',
+				array( 'leaflet' ),
+				$version,
+				true
+			);
 
-            // Register the sky tonight styles
-            wp_register_style(
-                'sgu-sky-tonight',
-                $plugin_url . 'assets/sky-tonight.css',
-                [],
-                $version
-            );
+			// Register placeholder/loading spinner styles for AJAX weather blocks
+			wp_register_style(
+				'sgu-weather-blocks',
+				$plugin_url . 'assets/weather-blocks.css',
+				array(),
+				$version
+			);
 
-            // Enqueue placeholder styles globally since blocks can appear on any page
-            wp_enqueue_style('sgu-weather-blocks');
-        }
-    }
+			// Register the sky tonight styles
+			wp_register_style(
+				'sgu-sky-tonight',
+				$plugin_url . 'assets/sky-tonight.css',
+				array(),
+				$version
+			);
+
+			// Enqueue placeholder styles globally since blocks can appear on any page
+			wp_enqueue_style( 'sgu-weather-blocks' );
+		}
+	}
 }
