@@ -475,6 +475,58 @@ if (! class_exists('SGU_Static')) {
         }
 
         /**
+         * get_apod_id
+         * 
+         * Find an existing APOD post matching both the title and the APOD date
+         * 
+         * @since 8.4
+         * @access public
+         * @static
+         * @author Kevin Pirnie <me@kpirnie.com>
+         * @package US Star Gazers
+         * 
+         * @param string $_title The APOD title
+         * @param string $_date The APOD date, in any strtotime format
+         * 
+         * @return int Returns the ID, or 0 if not found
+         * 
+         */
+        public static function get_apod_id(string $_title, string $_date): int
+        {
+
+            // the day the apod was published
+            $_day = strtotime($_date);
+
+            // our query arguments
+            $_args = array(
+                'post_type' => 'sgu_apod',
+                'post_status' => 'any',
+                'posts_per_page' => -1,
+                'no_found_rows' => true,
+                'date_query' => array(
+                    array(
+                        'year' => (int) date('Y', $_day),
+                        'month' => (int) date('n', $_day),
+                        'day' => (int) date('j', $_day),
+                    ),
+                ),
+            );
+
+            // query for the apods on that day
+            $_qry = new WP_Query($_args);
+
+            // compare sanitized titles, so stored entities don't cause a mismatch
+            foreach ($_qry->posts as $_post) {
+                if (sanitize_title($_post->post_title) === sanitize_title($_title)) {
+                    return $_post->ID;
+                }
+            }
+
+            // return 0 = nothing found
+            return 0;
+        }
+
+        /**
          * get_sgu_option
          * 
          * get an option saved from any of our settings

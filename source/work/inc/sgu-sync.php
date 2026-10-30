@@ -220,8 +220,11 @@ if (! class_exists('SGU_Sync')) {
             $this->cli_line(null, WP_CLI::colorize("%YStarting historical APOD sync...%N"));
             WP_CLI::line(sprintf("Date range: %s to %s", $start_date, $end_date));
 
+            // only hit the api when the endpoint is the api, otherwise scrape the feed and pages
+            $use_api = str_contains(SGU_Static::get_api_endpoint('apod')[0] ?? '', 'api.nasa.gov');
+
             $keys = SGU_Static::get_api_key('apod');
-            if (empty($keys)) {
+            if ($use_api && empty($keys)) {
                 WP_CLI::error("No API keys configured. Please set up NASA API keys in CME settings.");
                 return;
             }
@@ -246,7 +249,7 @@ if (! class_exists('SGU_Sync')) {
             while ($current_start <= $end) {
 
                 $chunk_end = clone $current_start;
-                $chunk_end->modify('+' . (self::DAYS_PER_REQUEST - 1) . ' days');
+                $chunk_end->modify(sprintf('+%d days', ($use_api ? self::DAYS_PER_REQUEST : $total_days) - 1));
 
                 if ($chunk_end > $end) {
                     $chunk_end = clone $end;
@@ -265,7 +268,7 @@ if (! class_exists('SGU_Sync')) {
 
                 WP_CLI::line(sprintf("Day Syncing: %d", $this->request_count + 1));
 
-                $response = $this->make_api_request($url);
+                $response = $use_api ? $this->make_api_request($url) : false;
                 $this->request_count++;
 
                 if ($response && is_array($response)) {
