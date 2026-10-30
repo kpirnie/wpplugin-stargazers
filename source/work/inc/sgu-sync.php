@@ -464,7 +464,7 @@ if (! class_exists('SGU_Sync')) {
 
             $media_type = sanitize_text_field($data['media_type'] ?? 'image');
 
-            $existing_id = SGU_Static::get_id_from_slug(sanitize_title($title), 'sgu_apod');
+            $existing_id = SGU_Static::get_apod_id($title, $date);
 
             $args = [
                 'post_status' => 'publish',

@@ -426,7 +426,7 @@ if (! class_exists('SGU_Space_Data_CRUD')) {
             }
 
             // Check if APOD already exists by title
-            $existing_id = (SGU_Static::get_id_from_slug(sanitize_title($title), 'sgu_apod')) ?: 0;
+            $existing_id = SGU_Static::get_apod_id($title, $date);
 
             // Build post data
             $args = [
