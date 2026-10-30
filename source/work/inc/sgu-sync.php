@@ -47,7 +47,7 @@ if( ! class_exists( 'SGU_Sync' ) ) {
         private const BATCH_PAUSE = 5;
 
         /** @var int Days per API request (max 100 per NASA docs) */
-        private const DAYS_PER_REQUEST = 50;
+        private const DAYS_PER_REQUEST = 5;
 
         public function __init( ): void {}
 
