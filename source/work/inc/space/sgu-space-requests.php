@@ -1,4 +1,5 @@
 <?php
+
 /** 
  * Space Requests
  * 
@@ -10,13 +11,13 @@
  * @author Kevin Pirnie <me@kpirnie.com>
  * @package US Star Gazers
  * 
-*/
+ */
 
 // We don't want to allow direct access to this
-defined( 'ABSPATH' ) || die( 'No direct script access allowed' );
+defined('ABSPATH') || die('No direct script access allowed');
 
 // make sure this class does not already exist
-if( ! class_exists( 'SGU_Space_Requests' ) ) {
+if (! class_exists('SGU_Space_Requests')) {
 
     /** 
      * Class SGU_Space_Requests
@@ -36,14 +37,15 @@ if( ! class_exists( 'SGU_Space_Requests' ) ) {
      * @author Kevin Pirnie <me@kpirnie.com>
      * @package US Star Gazers
      * 
-    */
-    class SGU_Space_Requests {
+     */
+    class SGU_Space_Requests
+    {
 
         /** 
          * @var SGU_Space_Data_CRUD|null Database handler instance for storing fetched data
          */
         private ?SGU_Space_Data_CRUD $space_data;
-        
+
         /** 
          * __construct
          * 
@@ -55,11 +57,12 @@ if( ! class_exists( 'SGU_Space_Requests' ) ) {
          * @author Kevin Pirnie <me@kpirnie.com>
          * @package US Star Gazers
          * 
-        */
-        public function __construct( ) {
+         */
+        public function __construct()
+        {
 
             // Initialize data handler for storing API responses
-            $this -> space_data = new SGU_Space_Data_CRUD( );
+            $this->space_data = new SGU_Space_Data_CRUD();
         }
 
         /** 
@@ -83,21 +86,22 @@ if( ! class_exists( 'SGU_Space_Requests' ) ) {
          * 
          * @return bool True if data successfully stored, false on failure
          * 
-        */
-        public function process_sync_data( string $which ) : bool {
-            
+         */
+        public function process_sync_data(string $which): bool
+        {
+
             // Fetch raw data from appropriate API
-            $data = $this -> get_the_data( $which );
+            $data = $this->get_the_data($which);
 
             // Route data to correct storage method based on type
-            return match( $which ) {
-                'geo' => $this -> space_data -> insert_geo( $data ),           // Geomagnetic forecasts
-                'neo' => $this -> space_data -> insert_neo( $data ),           // Near Earth Objects
-                'sf' => $this -> space_data -> insert_solar_flare( $data ),    // Solar flares
-                'sw' => $this -> space_data -> insert_space_weather( $data ),  // Space weather alerts
-                'apod' => $this -> space_data -> insert_apod( $data ),         // Astronomy Photo of the Day
-                'cme' => $this -> space_data -> insert_cme( $data ),           // Coronal Mass Ejections
-    
+            return match ($which) {
+                'geo' => $this->space_data->insert_geo($data),           // Geomagnetic forecasts
+                'neo' => $this->space_data->insert_neo($data),           // Near Earth Objects
+                'sf' => $this->space_data->insert_solar_flare($data),    // Solar flares
+                'sw' => $this->space_data->insert_space_weather($data),  // Space weather alerts
+                'apod' => $this->space_data->insert_apod($data),         // Astronomy Photo of the Day
+                'cme' => $this->space_data->insert_cme($data),           // Coronal Mass Ejections
+
                 default => true,                                                // Unknown type - skip silently
             };
         }
@@ -126,56 +130,61 @@ if( ! class_exists( 'SGU_Space_Requests' ) ) {
          * 
          * @return array Parsed API response data, or empty array on failure
          * 
-        */
-        private function get_the_data( string $which ) : array {
-            
+         */
+        private function get_the_data(string $which): array
+        {
+
             // Load API keys (cached after first call)
             $keys = SGU_Static::get_api_key($which);
-            
+
             // Load endpoints (cached after first call)
             $endpoints = SGU_Static::get_api_endpoint($which);
 
             // Array to store responses
             $ret = [];
-        
+
             // Loop through configured endpoints (usually just one)
-            foreach( $endpoints as $endpoint ) {
-                
+            foreach ($endpoints as $endpoint) {
+
                 // Select random API key if keys are required for this endpoint
                 // Some endpoints (NOAA) don't require keys, others (NASA) do
-                $key = ( in_array( $which, ['cme', 'sf', 'neo', 'apod'] ) ) 
-                    ? $keys[ array_rand( $keys, 1 ) ]['key']  // Random key from pool
+                $key = (in_array($which, ['cme', 'sf', 'neo', 'apod']))
+                    ? $keys[array_rand($keys, 1)]['key']  // Random key from pool
                     : '';                               // No key needed
-                
+
                 // Format endpoint URL with API key
                 // Endpoint should contain %s placeholder for key
-                $url = sprintf( $endpoint, $key );
+                $url = sprintf($endpoint, $key);
 
                 // get a response
-                $resp = SGU_Static::get_remote_data( $url );
-                
+                $resp = SGU_Static::get_remote_data($url);
+
+                // feeds come back as raw xml, so parse them into apod data
+                if ($which === 'apod' && $resp['success'] && is_string($resp['body'])) {
+                    $resp['body'] = (new SGU_Sync())->parse_apod_feed($resp['body']);
+                }
+
                 // Make HTTP request and parse response
                 $ret[] = ($resp['success']) ? $resp['body'] : [];
-
             }
 
             // check if we're syncing the apod
-            if( $which === 'apod' ){
+            if ($which === 'apod') {
                 // Check if API response is empty or failed
                 $has_data = false;
-                foreach( $ret as $r ) {
-                    if( ! empty( $r ) ) {
+                foreach ($ret as $r) {
+                    if (! empty($r)) {
                         $has_data = true;
                         break;
                     }
                 }
-                
+
                 // If no data from API, try to scrape
-                if( ! $has_data ) {
-                    $ss = new SGU_Sync( );
-                    $scraped = $ss -> scrape_apod_archive( date( 'Y-m-d' ), date( 'Y-m-d' ) );
-                    if( ! empty( $scraped ) ) {
-                        $ret = [ $scraped ];
+                if (! $has_data) {
+                    $ss = new SGU_Sync();
+                    $scraped = $ss->scrape_apod_archive(date('Y-m-d'), date('Y-m-d'));
+                    if (! empty($scraped)) {
+                        $ret = [$scraped];
                     }
                 }
             }
@@ -183,6 +192,5 @@ if( ! class_exists( 'SGU_Space_Requests' ) ) {
             // Return first response (or empty array if all failed)
             return $ret;
         }
-
     }
 }
